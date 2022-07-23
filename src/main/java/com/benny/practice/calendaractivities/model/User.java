@@ -5,9 +5,9 @@ import lombok.Data;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Data
+@Data //Getters and Setters handled by lombok
 @Entity
-@Table(name = "user")
+@Table(name = "users") //Table name must be plural
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
