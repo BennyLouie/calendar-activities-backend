@@ -25,7 +25,7 @@ public class SecurityConfig {
         http.cors().and()
                 .authorizeRequests()
                 //public paths
-                .antMatchers("/error", "/api/user/**").permitAll()
+                .antMatchers("/error", "/api/user/**", "/api/event/**").permitAll()
                 .antMatchers("/api/admin/**").hasRole("ADMIN")
                 //Authenticate remaining paths
                 .anyRequest().fullyAuthenticated()

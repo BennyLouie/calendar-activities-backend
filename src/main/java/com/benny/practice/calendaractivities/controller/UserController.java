@@ -1,8 +1,10 @@
 package com.benny.practice.calendaractivities.controller;
 
 import com.benny.practice.calendaractivities.dto.UserDto;
+import com.benny.practice.calendaractivities.model.Event;
 import com.benny.practice.calendaractivities.model.Role;
 import com.benny.practice.calendaractivities.model.User;
+import com.benny.practice.calendaractivities.service.iEventService;
 import com.benny.practice.calendaractivities.service.iUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,12 +14,16 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/user")
 public class UserController {
     @Autowired
     private iUserService userService;
+
+    @Autowired
+    private iEventService eventService;
 
     //Example: POST http://localhost:8080/api/user - data {user form}
     @PostMapping
@@ -50,5 +56,12 @@ public class UserController {
     public ResponseEntity<?> changeRole(@PathVariable String username, @PathVariable Role role) {
         User user = userService.changeRole(role, username);
         return ResponseEntity.ok(user);
+    }
+
+    //GET http:localhost:8080/api/user/{id}/events
+    @GetMapping("{id}/events")
+    public ResponseEntity<?> getEvents(@PathVariable Long id) {
+        List<Event> events = eventService.findByUserid(id);
+        return ResponseEntity.ok(events);
     }
 }
