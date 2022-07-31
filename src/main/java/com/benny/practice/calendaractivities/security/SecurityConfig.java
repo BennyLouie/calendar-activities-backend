@@ -26,6 +26,9 @@ public class SecurityConfig {
                 .authorizeRequests()
                 //public paths
                 .antMatchers("/error", "/api/user/**").permitAll()
+                .antMatchers("/api/admin/**").hasRole("ADMIN")
+                //Authenticate remaining paths
+                .anyRequest().fullyAuthenticated()
                 //login form and path
                 .and().formLogin().loginPage("/api/user/login").and()
                 .logout().permitAll()
