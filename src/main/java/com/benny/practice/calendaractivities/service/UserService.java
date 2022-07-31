@@ -1,5 +1,6 @@
 package com.benny.practice.calendaractivities.service;
 
+import com.benny.practice.calendaractivities.model.Role;
 import com.benny.practice.calendaractivities.model.User;
 import com.benny.practice.calendaractivities.repository.iUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,15 @@ public class UserService implements iUserService{
     }
 
     @Override
-    public List<User> findAllUsers() {
+    public User changeRole(Role newRole, String username) throws RuntimeException
+    {
+        User user = userRepository.findByUsername(username);
+        user.setRole(newRole);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public List<User> findAll() {
         return userRepository.findAll();
     }
 }

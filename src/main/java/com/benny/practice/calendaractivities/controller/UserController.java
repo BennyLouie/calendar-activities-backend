@@ -1,6 +1,7 @@
 package com.benny.practice.calendaractivities.controller;
 
 import com.benny.practice.calendaractivities.dto.UserDto;
+import com.benny.practice.calendaractivities.model.Role;
 import com.benny.practice.calendaractivities.model.User;
 import com.benny.practice.calendaractivities.service.iUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,12 @@ public class UserController {
         }
         User user = userService.findByUsername(principal.getName());
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    //PUT http:localhost:8080/api/user/{username}/change/{role}
+    @PutMapping("{username}/change/{role}") //can also be POST/PATCH
+    public ResponseEntity<?> changeRole(@PathVariable String username, @PathVariable Role role) {
+        User user = userService.changeRole(role, username);
+        return ResponseEntity.ok(user);
     }
 }

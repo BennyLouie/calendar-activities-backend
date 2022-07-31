@@ -1,5 +1,6 @@
 package com.benny.practice.calendaractivities.service;
 
+import com.benny.practice.calendaractivities.model.Role;
 import com.benny.practice.calendaractivities.model.User;
 
 import java.util.List;
@@ -11,5 +12,7 @@ public interface iUserService {
 
     User deleteUser(Long userid);
 
-    List<User> findAllUsers();
+    User changeRole(Role newRole, String username) throws RuntimeException;
+
+    List<User> findAll();
 }
